@@ -1,0 +1,362 @@
+<!-- The original version of this template was made by Jonathan Soma and then messed with and customized by Aaron Reiss. Story and data by Jon Viktor Cabuenas. -->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <style>
+      .modal {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: palevioletred;
+        justify-content: center;
+        align-items: center;
+        z-index: 9999;
+      }
+
+      .modal-content {
+        background: white;
+        padding: 2rem;
+        max-width: 400px;
+        border-radius: 8px;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 14px;
+      }
+
+      .modal button {
+        margin-top: 1rem;
+        padding: 0.5rem 1rem;
+        cursor: pointer;
+      }
+
+      body {
+        margin: 0;
+        font-family: Georgia, 'Times New Roman', Times, serif;
+        font-size: 20px;
+        text-rendering: optimizeLegibility;
+        background: #fff;
+      }
+
+      h1 {
+        max-width: 50%;
+        margin: 4rem auto 1rem auto;
+        font-family: Georgia, serif;
+        font-size: 2.5em;
+        line-height: 1.1;
+      }
+
+      .subhead {
+        max-width: 50%;
+        margin: 0 auto 1rem auto;
+        font-family: Georgia, serif;
+        font-style: italic;
+        font-size: 1.1em;
+        color: #444;
+      }
+
+      .byline {
+        max-width: 50%;
+        margin: 0 auto 1rem auto;
+        font-family: sans-serif;
+        font-size: 0.8em;
+        color: #666;
+      }
+
+      p {
+        max-width: 50%;
+        font-family: Georgia, serif;
+        margin: 0 auto 2rem auto;
+        font-size: 19px;
+        line-height: 1.6;
+      }
+
+      .datawrapper-container {
+        max-width: 50%;
+        margin: 0 auto 2rem auto;
+      }
+
+      .caption {
+        max-width: 50%;
+        margin: 0 auto 2rem auto;
+        font-family: sans-serif;
+        font-size: 0.8em;
+        color: #666;
+        text-align: center;
+      }
+
+      .google-maps-img {
+        max-width: 50%;
+        display: block;
+        margin: 0 auto 0.5rem auto;
+      }
+
+      .footer {
+        background: #f4f4f4;
+        text-align: center;
+        font-family: sans-serif;
+        font-size: 0.8em;
+        margin-top: 4em;
+        padding: 4em 2em;
+        line-height: 1.6;
+      }
+
+      .footer a {
+        color: #EE1C25;
+      }
+
+      #scrolly {
+        position: relative;
+        padding: 1rem;
+      }
+
+      .scrolly-overlay {
+        position: relative;
+        padding: 0;
+        max-width: 35rem;
+        margin-left: 2px;
+        margin-right: auto;
+      }
+
+      .sticky-thing {
+        position: -webkit-sticky;
+        position: sticky;
+        left: 0;
+        width: 100%;
+        margin: 0;
+        z-index: 0;
+        top: 0;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        justify-content: center;
+      }
+
+      .step {
+        margin: 0 auto 2rem auto;
+        margin-bottom: 25rem;
+        background-color: #fff;
+        color: black;
+        text-align: left;
+        border: 3px solid black;
+        max-width: 280px;
+      }
+
+      .step p {
+        padding: 1rem;
+        font-size: 1rem;
+        line-height: 1.5;
+        margin: 0;
+      }
+
+      .step h2 {
+        font-family: Georgia, serif;
+        font-size: 1em;
+        font-weight: bold;
+        margin: 0;
+        padding: 1rem 1rem 0 1rem;
+        color: #111;
+      }
+
+      #zoomBox {
+        overflow: clip;
+        margin-left: 0 !important;
+        max-width: 50vw !important;
+        max-height: 100vh !important;
+      }
+
+      .photoDiv {
+        width: 100%;
+        margin-right: 0px;
+        margin-left: auto;
+        display: block;
+        transition: opacity 0.3s ease;
+      }
+
+      @media only screen and (min-width: 700px) {
+        #scrolly.side-by-side {
+          display: flex;
+        }
+
+        #scrolly.side-by-side > div {
+          flex-basis: 0;
+          flex-grow: 1;
+          flex-shrink: 1;
+          padding: 0.75em;
+        }
+
+        #scrolly.side-by-side .scrolly-overlay {
+          margin-top: 70vh;
+          order: 0;
+          min-width: 15rem;
+          max-width: 20rem;
+        }
+
+        #scrolly.side-by-side .sticky-thing {
+          order: 1;
+          flex-grow: 2;
+        }
+      }
+    </style>
+    <script src="https://unpkg.com/intersection-observer@0.5.1/intersection-observer.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/scrollama/3.0.4/scrollama.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.3.0/d3.min.js"></script>
+  </head>
+
+  <body>
+
+    <h1>Cornering the Competition</h1>
+    <p class="subhead">How Jollibee and McDonald's Keep Opening Side by Side in Metro Manila</p>
+    <p class="byline">By Jon Viktor Cabuenas</p>
+
+    <p>At the Venice Grand Canal Mall in Taguig, customers deciding between Jollibee and McDonald's — the Philippines' biggest fast food rivals — don't have to walk far. The two restaurants are just 10.7 meters apart.</p>
+
+    <p>This is not an isolated case.</p>
+
+    <p>Despite competing for many of the same customers, the two repeatedly choose the same commercial areas. Data from the Google Maps Places API shows that Metro Manila's two most ubiquitous fast-food chains frequently become neighbors.</p>
+
+    <div class="datawrapper-container">
+      <iframe title="Fast Food Chain Branches in Metro Manila" aria-label="Table" id="datawrapper-chart-sP6Ko" src="https://datawrapper.dwcdn.net/sP6Ko/2/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="244" data-external="1"></iframe>
+      <script type="text/javascript">(function(){function e(){window.addEventListener(`message`,function(e){if(e.data[`datawrapper-height`]!==void 0){var t=document.querySelectorAll(`iframe`);for(var n in e.data[`datawrapper-height`])for(var r=0,i;i=t[r];r++)if(i.contentWindow===e.source){var a=e.data[`datawrapper-height`][n]+`px`;i.style.height=a}}})}e()})();</script>
+    </div>
+
+    <section id="scrolly" class="side-by-side">
+      <div class="sticky-thing">
+        <div id="zoomBox">
+          <img id="scrollyPhoto" class="photoDiv" src="map_all.png" alt="Map of all Jollibee and McDonald's branches in Metro Manila">
+        </div>
+      </div>
+
+      <div class="scrolly-overlay">
+
+        <div class="step" id="step1">
+          <h2>The full picture</h2>
+          <p>Together, the two chains operate hundreds of stores across Metro Manila. At first glance, the dense network of stores makes it difficult to tell whether neighboring locations are simply a product of urban density or evidence of a broader pattern.</p>
+        </div>
+
+        <div class="step" id="step2">
+          <h2>The pattern emerges</h2>
+          <p>Filtering the map to show only branches within 250 meters of each other begins to reveal a pattern. Neighboring stores appear across major commercial districts, suggesting that the two frequently occupy the same high-demand areas.</p>
+        </div>
+
+        <div class="step" id="step3">
+          <h2>Closer than expected</h2>
+          <p>Narrowing the distance to 100 meters removes several pairs, but the trend remains. At this range, many neighboring branches occupy the same intersection, shopping center, or commercial strip.</p>
+        </div>
+
+        <div class="step" id="step4">
+          <h2>Sharing the same space</h2>
+          <p>At 50 meters, the remaining pairs are often in the same building or adjacent developments. At this proximity, customers can easily choose between the two restaurants.</p>
+        </div>
+
+        <div class="step" id="step5">
+          <h2>Nearly adjacent</h2>
+          <p>Only six pairs remain. These stores are separated by little more than a storefront or walkway.</p>
+        </div>
+
+        <div class="step" id="step6">
+          <h2>The closest competitors</h2>
+          <p>At Venice Grand Canal Mall in Taguig, the two rivals are separated by only 10.7 meters — close enough that diners can move from one shop to another in seconds.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <img class="google-maps-img" src="google_maps.png" alt="Google Maps screenshot showing Jollibee and McDonald's at Venice Grand Canal Mall just meters apart">
+    <p class="caption">Jollibee and McDonald's at Venice Grand Canal Mall in Taguig, just 10.7 meters apart.<br><em>Source: Google Maps</em></p>
+
+    <p>In Metro Manila, competition between Jollibee and McDonald's is not just about menus or marketing. It's also about location — and sometimes, cornering the competition means opening right next door.</p>
+
+    <div class="datawrapper-container">
+      <iframe title="Neighboring Jollibee and McDonald's Branches in Metro Manila" aria-label="Table" id="datawrapper-chart-tX4a7" src="https://datawrapper.dwcdn.net/tX4a7/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="344" data-external="1"></iframe>
+      <script type="text/javascript">(function(){function e(){window.addEventListener(`message`,function(e){if(e.data[`datawrapper-height`]!==void 0){var t=document.querySelectorAll(`iframe`);for(var n in e.data[`datawrapper-height`])for(var r=0,i;i=t[r];r++)if(i.contentWindow===e.source){var a=e.data[`datawrapper-height`][n]+`px`;i.style.height=a}}})}e()})();</script>
+    </div>
+
+    <div class="footer">
+      <p><strong>Data & Methodology</strong><br>
+      Branch location data collected via the Google Maps Places API in June 2026. Analysis covers all 17 cities and municipalities of Metro Manila (NCR). Six branches with coordinates placed outside NCR boundaries were excluded.<br><br>
+      <a href="https://github.com/yourusername/your-repo">View the data and code on GitHub</a></p>
+    </div>
+
+    <!-- Mobile Warning Modal -->
+    <div id="deviceModal" class="modal">
+      <div class="modal-content">
+        <span>
+          This page is best viewed on a desktop or laptop. It may look a bit off on a phone or tablet.
+        </span>
+        <button id="continueBtn">Continue Anyway</button>
+      </div>
+    </div>
+
+    <script>
+      // Step One — all branches
+      d3.select("#step1").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "map_all.png");
+      })
+
+      // Step Two — 250m pairs
+      d3.select("#step2").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "map_250m.png");
+      })
+
+      // Step Three — 100m pairs
+      d3.select("#step3").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "map_100m.png");
+      })
+
+      // Step Four — 50m pairs
+      d3.select("#step4").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "map_50m.png");
+      })
+
+      // Step Five — 25m pairs
+      d3.select("#step5").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "map_25m.png");
+      })
+
+      // Step Six — 15m pairs (Venice Grand Canal close-up)
+      d3.select("#step6").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "map_15m.png");
+      })
+    </script>
+
+    <!-- LEAVE ALONE, scrolly code -->
+    <script>
+      const scroller = scrollama();
+
+      scroller
+        .setup({
+          step: "#scrolly .scrolly-overlay .step",
+          offset: 0.5,
+          debug: false
+        })
+        .onStepEnter(function({ element, index, direction }) {
+          const event = new CustomEvent('stepin', { detail: { direction: direction } })
+          element.dispatchEvent(event);
+        })
+        .onStepExit(function({ element, index, direction }) {
+          const event = new CustomEvent('stepout', { detail: { direction: direction } })
+          element.dispatchEvent(event);
+        });
+
+      window.addEventListener("resize", scroller.resize);
+    </script>
+
+    <!-- Mobile warning -->
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const isSmallScreen = window.innerWidth <= 900;
+        if (isSmallScreen) {
+          document.getElementById("deviceModal").style.display = "flex";
+        }
+        document.getElementById("continueBtn").addEventListener("click", function () {
+          document.getElementById("deviceModal").style.display = "none";
+        });
+      });
+    </script>
+
+  </body>
+</html>
