@@ -18,6 +18,7 @@ This was my first time using the Google Maps Places API and building a scrollyte
 ## For future me (With more time)
 - Increase dot size on the maps for better readability
 - Add an inset locator map showing NCR within the Philippines
+- Make the visuals (a lot) prettier!
 
 ## Live page
 [https://jonvikktor.github.io/metromanila-fastfood](https://jonvikktor.github.io/metromanila-fastfood)
