@@ -259,16 +259,18 @@
 
         <div class="step" id="step6">
           <h2>The closest competitors</h2>
-          <p>At Venice Grand Canal Mall in Taguig, the two rivals are separated by only 10.7 meters — close enough that diners can move from one shop to another in seconds.</p>
+          <p>At Venice Grand Canal Mall in Taguig, the two rivals are separated by only 10.7 meters.</p>
+        </div>
+
+        <div class="step" id="step7">
+          <h2>The closest competitors</h2>
+          <p>That's close enough that diners can move from one shop to another in seconds!</p>
         </div>
 
       </div>
     </section>
 
-    <img class="google-maps-img" src="google_maps.png" alt="Google Maps screenshot showing Jollibee and McDonald's at Venice Grand Canal Mall just meters apart">
-    <p class="caption">Jollibee and McDonald's at Venice Grand Canal Mall in Taguig, just 10.7 meters apart.<br><em>Source: Google Maps</em></p>
-
-    <p>In Metro Manila, competition between Jollibee and McDonald's is not just about menus or marketing. It's also about location — and sometimes, cornering the competition means opening right next door.</p>
+<p>In Metro Manila, competition between Jollibee and McDonald's is not just about menus or marketing. It's also about location — and sometimes, cornering the competition means opening right next door.</p>
 
     <div class="datawrapper-container">
       <iframe title="Neighboring Jollibee and McDonald's Branches in Metro Manila" aria-label="Table" id="datawrapper-chart-tX4a7" src="https://datawrapper.dwcdn.net/tX4a7/1/" scrolling="no" frameborder="0" style="width: 0; min-width: 100% !important; border: none;" height="344" data-external="1"></iframe>
@@ -278,7 +280,7 @@
     <div class="footer">
       <p><strong>Data & Methodology</strong><br>
       Branch location data collected via the Google Maps Places API in June 2026. Analysis covers all 17 cities and municipalities of Metro Manila (NCR). Six branches with coordinates placed outside NCR boundaries were excluded.<br><br>
-      <a href="https://github.com/jonvikktor/metromanila-fastfood">View the data and code on GitHub</a></p>
+      <a href="https://github.com/yourusername/your-repo">View the data and code on GitHub</a></p>
     </div>
 
     <!-- Mobile Warning Modal -->
@@ -320,6 +322,11 @@
       // Step Six — 15m pairs (Venice Grand Canal close-up)
       d3.select("#step6").on('stepin', function(e) {
         d3.select("#scrollyPhoto").attr("src", "map_15m.png");
+      })
+
+      // Step Seven — Google Maps close-up
+      d3.select("#step7").on('stepin', function(e) {
+        d3.select("#scrollyPhoto").attr("src", "google_maps.png");
       })
     </script>
 
