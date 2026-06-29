@@ -16,6 +16,7 @@ Maps were done on QGIS, with labels made on Adobe Illustrator.
 This was my first time using the Google Maps Places API and building a scrollytelling page from scratch. The Haversine formula was done in Python, as recommended by Google. The Google Maps Places API occasionally returned branches with coordinates slightly outside the NCR administrative boundary, even with a restriction bounding box.
 
 ## For future me (With more time)
+- Fix the problem with the locations visually outside Metro Manila!
 - Increase dot size on the maps for better readability
 - Add an inset locator map showing NCR within the Philippines
 - Make the visuals (a lot) prettier!
